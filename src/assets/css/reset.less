@@ -1,0 +1,71 @@
+/* reset.less */
+
+/* 全局设置 */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  color: #000;
+  font-family: Arial, sans-serif;
+  font-size: 100%;
+  line-height: 1.4;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 基础元素重置 */
+h1, h2, h3, h4, h5, h6,
+p, blockquote, pre,
+dl, dd, ol, ul, li,
+figure, figcaption,
+table, th, td,
+fieldset, legend {
+  margin: 0;
+  padding: 0;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+img, video, audio {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 表单元素重置 */
+button, input, select, textarea {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+}
+
+/* 表格元素重置 */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* 引用元素重置 */
+blockquote, q {
+  quotes: none;
+}
+
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
+  content: '';
+}
+
+/* HTML5 元素显示 */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, nav, section {
+  display: block;
+}
