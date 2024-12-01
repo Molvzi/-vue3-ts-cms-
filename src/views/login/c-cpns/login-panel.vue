@@ -39,18 +39,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref,watch } from 'vue'
 import paneAccount from './pane-account.vue'
 import panePhone from './pane-phone.vue'
+import { localCache } from '@/utils/cache';
 
 const activeName = ref('account')
-const isRemPwd = ref(false)
+const isRemPwd = ref<boolean>(localCache.getCache('isRemPwd') ?? false)
+watch(isRemPwd,(newVal)=>{
+  localCache.setCache('isRemPwd',newVal)
+})
 //------定义了一个 accountRef 变量，它是一个对 paneAccount 组件实例的引用。------
 const accountRef = ref<InstanceType<typeof paneAccount>>()
 
 function handleLoginBtnClick() {
   if (activeName.value === 'account') {
-    accountRef.value?.loginAction()
+    accountRef.value?.loginAction(isRemPwd.value)
+    if(isRemPwd.value){
+
+    }
   } else {
     console.log('手机登录')
   }
