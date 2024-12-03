@@ -1,31 +1,44 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="main">
-    <h2>main</h2>
-    <button @click="handleExitClick">退出登录</button>
+    <el-container class="main-content">
+      <el-aside width="210px">
+        <main-menu />
+      </el-aside>
+      <el-container>
+        <el-header height="50px">
+          <main-header />
+        </el-header>
+        <el-main>Main</el-main>
+      </el-container>
+    </el-container>
   </div>
 </template>
 
-<script setup lang="ts">
-import { LOGIN_TOKEN } from '@/global/constanants'
-import router from '@/router';
-import { localCache } from '@/utils/cache'
-
-function handleExitClick() {
-  //1.删除token
-  localCache.removeCache(LOGIN_TOKEN)
-  //2.跳转到登录页面
-  router.push('/login')
-}
-</script>
+<script setup lang="ts"></script>
+import MainMenu from '@/components/MainMenu.vue' import MainHeader
+from'@/components/MainHeader.vue'
 
 <style lang="less" scoped>
 .main {
-  color: #000;
+  height: 100%;
 }
-button {
-  margin-top: 20px;
-  color: aquamarine;
-  background-color: #000;
+.main-content {
+  height: 100%;
+
+  .el-aside {
+    overflow-x: hidden;
+    overflow-y: auto;
+    line-height: 200px;
+    text-align: left;
+    cursor: pointer;
+    background-color: #001529;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }
 </style>
