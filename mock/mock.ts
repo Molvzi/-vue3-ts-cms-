@@ -287,7 +287,7 @@ Mock.mock('/role/1/menu', 'get', () => {
         name: '商品中心',
         type: 1,
         url: '/main/product',
-        icon: 'el-icon-s-goods',
+        icon: 'el-icon-shopping-cart',
         sort: 3,
         children: [
           {
