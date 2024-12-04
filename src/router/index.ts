@@ -29,14 +29,12 @@ const router = createRouter({
         },
         {
           path: '/main/system/user',
-          component: () =>
-            import('../views/main/system/user/user.vue')
+          component: () => import('../views/main/system/user/user.vue')
         },
         {
           path: '/main/system/role',
-          component: () =>
-            import('../views/main/system/role/role.vue')
-        },
+          component: () => import('../views/main/system/role/role.vue')
+        }
       ]
     },
     {
@@ -53,7 +51,7 @@ router.beforeEach((to) => {
   //只有登录成功(token),才能访问main页面
   const token = localCache.getCache(LOGIN_TOKEN)
 
-  if (to.path === '/main' && !token) {
+  if (to.path.startsWith('/main') && !token) {
     return '/login'
   }
 })
