@@ -54,7 +54,6 @@ defineProps({
 //1.获取动态的菜单数据
 const loginStore = useLoginStore()
 const userMenus = loginStore.userMenus
-console.log('userMenus', userMenus)
 
 //2.监听item的点击
 const router = useRouter()
