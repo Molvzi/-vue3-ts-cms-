@@ -3,12 +3,13 @@
     <!-- 1.logo部分 -->
     <div class="logo">
       <img class="img" src="../../assets/img/logo.svg" alt="" />
-      <h2 class="title">Pinia 管理系统</h2>
+      <h2 v-show="!isFold" class="title">Pinia 管理系统</h2>
     </div>
     <!-- 2.menu部分 -->
     <div class="menu">
       <el-menu
         default-active="3"
+        :collapse="isFold"
         active-text-color="#fff"
         background-color="#001529"
         text-color="#b7bdc3"
@@ -38,6 +39,14 @@
 <script setup lang="ts">
 import useLoginStore from '@/store/login/login'
 
+//0.定义props
+defineProps({
+  isFold: {
+    type: Boolean,
+    default: true
+  }
+})
+
 //1.获取动态的菜单数据
 const loginStore = useLoginStore()
 const userMenus = loginStore.userMenus
@@ -51,15 +60,13 @@ console.log('userMenus', userMenus)
 }
 .logo {
   display: flex;
-  height: 28px;
-  padding: auto 20px;
-  flex-direction: row;
+  align-items: center;
   justify-content: center;
-  overflow: hidden;
+  height: 60px;
 
   .img {
-    height: 100%;
-    margin: 0 10px;
+    height: 24px;
+    margin-right: 10px;
   }
 
   .title {
