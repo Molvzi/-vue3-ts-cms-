@@ -353,25 +353,25 @@ Mock.mock('/role/1/menu', 'get', () => {
         id: 41,
         name: '随便聊聊',
         type: 1,
-        url: '/main/chat',
+        url: '/main/story',
         icon: 'el-icon-chat-dot-square',
         sort: 4,
         children: [
           {
             id: 42,
-            name: '聊天室',
+            name: '你的故事',
             type: 2,
-            url: '/main/chat/room',
-            sort: 110,
+            url: '/main/story/chat',
+            sort: 108,
             children: null,
             parentId: 41
           },
           {
             id: 43,
-            name: '聊天记录',
+            name: '故事列表',
             type: 2,
-            url: '/main/chat/history',
-            sort: 111,
+            url: '/main/story/list',
+            sort: 109,
             children: null,
             parentId: 41
           }

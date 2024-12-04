@@ -15,27 +15,8 @@ const router = createRouter({
     },
     {
       path: '/main',
-      component: () => import('../views/main/main.vue'),
-      children: [
-        {
-          path: '/main/analysis/overview',
-          component: () =>
-            import('../views/main/analysis/overview/overview.vue')
-        },
-        {
-          path: '/main/analysis/dashboard',
-          component: () =>
-            import('../views/main/analysis/dashboard/dashboard.vue')
-        },
-        {
-          path: '/main/system/user',
-          component: () => import('../views/main/system/user/user.vue')
-        },
-        {
-          path: '/main/system/role',
-          component: () => import('../views/main/system/role/role.vue')
-        }
-      ]
+      name: 'main',
+      component: () => import('../views/main/main.vue')
     },
     {
       path: '/:pathMatch(.*)',
@@ -43,6 +24,30 @@ const router = createRouter({
     }
   ]
 })
+
+//1.获取所有的路由
+const localRoutes = [
+  {
+    path: '/main/analysis/overview',
+    component: () => import('../views/main/analysis/overview/overview.vue')
+  },
+  {
+    path: '/main/analysis/dashboard',
+    component: () => import('../views/main/analysis/dashboard/dashboard.vue')
+  },
+  {
+    path: '/main/system/user',
+    component: () => import('../views/main/system/user/user.vue')
+  },
+  {
+    path: '/main/system/role',
+    component: () => import('../views/main/system/role/role.vue')
+  }
+]
+
+//2.动态的添加路由
+router.addRoute('main', localRoutes[0])
+router.addRoute('main', localRoutes[1])
 
 //导航守卫
 //参数:to(跳转的位置),from(从哪里跳转)
