@@ -16,10 +16,18 @@ Mock.mock('/login', 'post', (options: any) => {
       },
       message: '登录成功'
     }
+  } else if (name === 'common' && password === '123456') {
+    return {
+      code: 1,
+      data: {
+        id: '4',
+        name: 'user',
+        token:'eyabcdefg123456ddidbna991d.eyld09-ps0dvjassdd'
+      }
+    }
   } else {
     return {
       code: 0,
-      data: null,
       message: '用户名或密码错误'
     }
   }
@@ -57,6 +65,37 @@ Mock.mock('/users/1', 'get', () => {
   }
 })
 
+Mock.mock('/users/4', 'get', () => {
+  return {
+    code: 1,
+    data: {
+      id: 4,
+      name: 'user',
+      realname: 'John Doe',
+      cellphone: '1234567890',
+      enable: 1,
+      createAt: '2024-01-01T12:00:00Z',
+      updateAt: '2024-01-02T12:00:00Z',
+      role: {
+        id: 4,
+        name: 'User',
+        intro: 'User Role',
+        createAt: '2024-01-01T12:00:00Z',
+        updateAt: '2024-01-02T12:00:00Z'
+      },
+      department: {
+        id: 1,
+        name: 'IT',
+        parentId: null,
+        createAt: '2024-01-01T12:00:00Z',
+        updateAt: '2024-01-02T12:00:00Z',
+        leader: 'Alice'
+      }
+    },
+    message: '获取用户信息成功'
+  }
+})
+
 // 模拟获取用户菜单接口
 Mock.mock('/role/1/menu', 'get', () => {
   return {
@@ -66,7 +105,7 @@ Mock.mock('/role/1/menu', 'get', () => {
         id: 38,
         name: '系统总览',
         type: 1,
-        url: '/main/anaylysis',
+        url: '/main/analysis',
         icon: 'el-icon-monitor',
         sort: 1,
         children: [
@@ -74,7 +113,7 @@ Mock.mock('/role/1/menu', 'get', () => {
             id: 39,
             name: '核心技术',
             type: 2,
-            url: '/main/anaylysis/overview',
+            url: '/main/analysis/overview',
             sort: 106,
             childern: null,
             parentId: 38
@@ -83,7 +122,7 @@ Mock.mock('/role/1/menu', 'get', () => {
             id: 40,
             name: '商品统计',
             type: 2,
-            url: '/main/anaylysis/dashboard',
+            url: '/main/analysis/dashboard',
             sort: 107,
             childern: null,
             parentId: 38
@@ -349,7 +388,7 @@ Mock.mock('/role/4/menu', 'get', () => {
         id: 38,
         name: '系统总览',
         type: 1,
-        url: '/main/anaylysis',
+        url: '/main/analysis',
         icon: 'el-icon-monitor',
         sort: 1,
         children: [
@@ -357,7 +396,7 @@ Mock.mock('/role/4/menu', 'get', () => {
             id: 39,
             name: '核心技术',
             type: 2,
-            url: '/main/anaylysis/overview',
+            url: '/main/analysis/overview',
             sort: 106,
             children: null,
             parentId: 38
@@ -366,7 +405,7 @@ Mock.mock('/role/4/menu', 'get', () => {
             id: 40,
             name: '商品统计',
             type: 2,
-            url: '/main/anaylysis/dashboard',
+            url: '/main/analysis/dashboard',
             sort: 107,
             children: null,
             parentId: 38

@@ -25,7 +25,10 @@
             </template>
             <!-- 遍历子菜单 -->
             <template v-for="subitem in item.children" :key="subitem.id">
-              <el-menu-item :index="subitem.id + ''">
+              <el-menu-item
+                :index="subitem.id + ''"
+                @click="handleItemClick(subitem)"
+              >
                 {{ subitem.name }}
               </el-menu-item>
             </template>
@@ -38,6 +41,7 @@
 
 <script setup lang="ts">
 import useLoginStore from '@/store/login/login'
+import { useRouter } from 'vue-router';
 
 //0.定义props
 defineProps({
@@ -51,6 +55,14 @@ defineProps({
 const loginStore = useLoginStore()
 const userMenus = loginStore.userMenus
 console.log('userMenus', userMenus)
+
+//2.监听item的点击
+const router = useRouter()
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function handleItemClick(item: any) {
+  const url = item.url
+  router.push(url)
+}
 </script>
 
 <style lang="less" scoped>
