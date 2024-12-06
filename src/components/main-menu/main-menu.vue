@@ -8,7 +8,7 @@
     <!-- 2.menu部分 -->
     <div class="menu">
       <el-menu
-        default-active="3"
+        :default-active="defaultActive"
         :collapse="isFold"
         active-text-color="#fff"
         background-color="#001529"
@@ -41,7 +41,9 @@
 
 <script setup lang="ts">
 import useLoginStore from '@/store/login/login'
-import { useRouter } from 'vue-router';
+import { mapPathToMenu } from '@/utils/map-menus';
+import { ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 //0.定义props
 defineProps({
@@ -62,6 +64,11 @@ function handleItemClick(item: any) {
   const url = item.url
   router.push(url)
 }
+
+//3.ElMenu的默认菜单
+const route = useRoute()
+const pathMenu = mapPathToMenu(route.path, userMenus)
+const defaultActive = ref(pathMenu.id + '')
 </script>
 
 <style lang="less" scoped>

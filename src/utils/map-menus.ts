@@ -37,5 +37,22 @@ export function mapMenusToRoutes(userMenus: any[]) {
       if (!firstMenu && route) firstMenu = submenu
     }
   }
+  //TODO: 检查上一个视频的firstMenu是否有问题
   return [routes, firstMenu]
+}
+
+/**
+ *  根据路径匹配需要的菜单
+ * @param path 需要匹配的路径
+ * @param userMenus 用户的菜单
+ * @returns 匹配到的菜单
+ */
+export function mapPathToMenu(path:string,userMenus:any[]){
+  for (const menu of userMenus) {
+    for (const submenu of menu.children) {
+      if(submenu.url === path){
+        return submenu
+      }
+    }
+  }
 }
