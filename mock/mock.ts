@@ -333,7 +333,7 @@ Mock.mock('/role/1/menu', 'get', () => {
             id: 10,
             name: '商品类别',
             type: 2,
-            url: '/main/product/list',
+            url: '/main/product/category',
             sort: 108,
             children: null,
             parentId: 9
@@ -342,7 +342,7 @@ Mock.mock('/role/1/menu', 'get', () => {
             id: 11,
             name: '商品信息',
             type: 2,
-            url: '/main/product/add',
+            url: '/main/product/goods',
             sort: 109,
             children: null,
             parentId: 9
