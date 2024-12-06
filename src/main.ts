@@ -3,18 +3,13 @@ import 'normalize.css'
 import './assets/css/index.less'
 import App from './App.vue'
 import router from './router'
-import pinia from './store'
-import registerIcons from './global/register-icons'
+import store from './store'
+import icons from './global/register-icons'
 import '../mock/mock'
-//全局引入element-plus
-// import ElementPlus from 'element-plus'
-// import 'element-plus/dist/index.css'
-
-
 
 const app = createApp(App)
 
+app.use(icons)
+app.use(store)
 app.use(router)
-app.use(pinia)
-app.use(registerIcons)
 app.mount('#app')
