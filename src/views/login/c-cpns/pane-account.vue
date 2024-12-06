@@ -3,7 +3,7 @@
     <el-form
       :model="account"
       :rules="accountRules"
-      label-width="auto"
+      label-width="60px"
       size="large"
       status-icon
       ref="formRef"

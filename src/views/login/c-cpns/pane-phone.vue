@@ -1,6 +1,6 @@
 <template>
   <div class="pane-phone">
-    <el-form label-width="auto" size="large">
+    <el-form label-width="60px" size="large">
       <el-form-item label="手机号:">
         <el-input />
       </el-form-item>

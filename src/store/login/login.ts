@@ -10,6 +10,7 @@ import { localCache } from '@/utils/cache'
 import router from '@/router'
 import { LOGIN_TOKEN } from '../../global/constanants'
 import { mapMenusToRoutes } from '@/utils/map-menus'
+import type { RouteRecordRaw } from 'vue-router'
 
 interface ILoginState {
   token: string
@@ -20,7 +21,7 @@ interface ILoginState {
 const useLoginStore = defineStore('login', {
   state: (): ILoginState => ({
     token: '',
-    userInfo:  {},
+    userInfo: {},
     userMenus: []
   }),
   actions: {
@@ -46,27 +47,28 @@ const useLoginStore = defineStore('login', {
       localCache.setCache('userMenus', userMenus)
 
       //!!!动态添加路由
-      const routes = mapMenusToRoutes(userMenus)
-      routes.forEach((route)=>router.addRoute('main',route))
-
+      const [routes] = mapMenusToRoutes(userMenus)
+      routes.forEach((route: RouteRecordRaw) => router.addRoute('main', route))
 
       //5.页面跳转
       router.push('/main')
     },
 
-    loadLocalCacheAction(){
+    loadLocalCacheAction() {
       //1.用户进行刷新时,重新加载本地缓存
       const token = localCache.getCache(LOGIN_TOKEN)
       const userInfo = localCache.getCache('userInfo')
       const userMenus = localCache.getCache('userMenus')
-      if(token && userInfo && userMenus){
+      if (token && userInfo && userMenus) {
         this.token = token
         this.userInfo = userInfo
         this.userMenus = userMenus
 
         //!!!动态添加路由
-        const routes = mapMenusToRoutes(userMenus)
-        routes.forEach((route)=>router.addRoute('main',route))
+        const [routes] = mapMenusToRoutes(userMenus)
+        routes.forEach((route: RouteRecordRaw) =>
+          router.addRoute('main', route)
+        )
       }
     }
   }
