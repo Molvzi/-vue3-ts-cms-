@@ -37,8 +37,7 @@ export function mapMenusToRoutes(userMenus: any[]) {
       if (!firstMenu && route) firstMenu = submenu
     }
   }
-  //TODO: 检查上一个视频的firstMenu是否有问题
-  return [routes, firstMenu]
+  return routes
 }
 
 /**

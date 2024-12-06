@@ -47,7 +47,7 @@ const useLoginStore = defineStore('login', {
       localCache.setCache('userMenus', userMenus)
 
       //!!!动态添加路由
-      const [routes] = mapMenusToRoutes(userMenus)
+      const routes = mapMenusToRoutes(userMenus)
       routes.forEach((route: RouteRecordRaw) => router.addRoute('main', route))
 
       //5.页面跳转
@@ -65,7 +65,7 @@ const useLoginStore = defineStore('login', {
         this.userMenus = userMenus
 
         //!!!动态添加路由
-        const [routes] = mapMenusToRoutes(userMenus)
+        const routes = mapMenusToRoutes(userMenus)
         routes.forEach((route: RouteRecordRaw) =>
           router.addRoute('main', route)
         )
