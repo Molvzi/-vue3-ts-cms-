@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import department from '@/router/main/system/department/department'
 import Mock from 'mockjs'
 
 // 模拟登录接口
@@ -22,7 +24,7 @@ Mock.mock('/login', 'post', (options: any) => {
       data: {
         id: '4',
         name: 'user',
-        token:'eyabcdefg123456ddidbna991d.eyld09-ps0dvjassdd'
+        token: 'eyabcdefg123456ddidbna991d.eyld09-ps0dvjassdd'
       }
     }
   } else {
@@ -413,5 +415,51 @@ Mock.mock('/role/4/menu', 'get', () => {
         ]
       }
     ]
+  }
+})
+
+//模拟获取用户列表
+Mock.mock('/users/list', 'post', (options: any) => {
+  const { offset, size } = JSON.parse(options.body)
+  return {
+    code: 0,
+    data: {
+      list: [
+        {
+          id: 1,
+          name: 'adminn',
+          realname: 'John Doe',
+          cellphone: '1234567890',
+          enable: 1,
+          departmentId: 1409,
+          roleId: 6940,
+          createAt: '2024-01-01T12:00:00Z',
+          updateAt: '2024-01-02T12:00:00Z'
+        },
+        {
+          id: 4,
+          name: 'user',
+          realname: 'John Doe',
+          cellphone: '1234567890',
+          enable: 1,
+          departmentId: 1409,
+          roleId: 6940,
+          createAt: '2024-01-01T12:00:00Z',
+          updateAt: '2024-01-02T12:00:00Z'
+        },
+        {
+          id: 5,
+          name: 'user',
+          realname: 'John Doe',
+          cellphone: '1234567890',
+          enable: 1,
+          departmentId: 1409,
+          roleId: 6940,
+          createAt: '2024-01-01T12:00:00Z',
+          updateAt: '2024-01-02T12:00:00Z'
+        }
+      ],
+      totalCount: 2
+    }
   }
 })
