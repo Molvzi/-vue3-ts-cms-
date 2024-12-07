@@ -17,8 +17,6 @@
             <el-input placeholder="请输入查询的用户名" />
           </el-form-item>
         </el-col>
-      </el-row>
-      <el-row :gutter="20">
         <el-col :span="8">
           <el-form-item label="状态:">
             <el-select placeholder="请选择查询状态">
