@@ -32,6 +32,7 @@ function handleFoldChange(flag: boolean) {
 <style lang="less" scoped>
 .main {
   height: 100%;
+  background: #f0f2f5;
 }
 .main-content {
   height: 100%;
@@ -51,6 +52,9 @@ function handleFoldChange(flag: boolean) {
     &::-webkit-scrollbar {
       display: none;
     }
+  }
+  .el-header{
+    background: #fff;
   }
 }
 </style>

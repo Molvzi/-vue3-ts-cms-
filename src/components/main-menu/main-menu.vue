@@ -41,9 +41,9 @@
 
 <script setup lang="ts">
 import useLoginStore from '@/store/login/login'
-import { mapPathToMenu } from '@/utils/map-menus';
-import { ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { mapPathToMenu } from '@/utils/map-menus'
+import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 //0.定义props
 defineProps({
@@ -67,8 +67,10 @@ function handleItemClick(item: any) {
 
 //3.ElMenu的默认菜单
 const route = useRoute()
-const pathMenu = mapPathToMenu(route.path, userMenus)
-const defaultActive = ref(pathMenu.id + '')
+const defaultActive = computed(() => {
+  const pathMenu = mapPathToMenu(route.path, userMenus)
+  return pathMenu.id + ''
+})
 </script>
 
 <style lang="less" scoped>
