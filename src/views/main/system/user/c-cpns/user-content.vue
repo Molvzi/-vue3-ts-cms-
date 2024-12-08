@@ -32,12 +32,17 @@
             label="电话号码"
             width="150"
           />
-          <el-table-column
-            align="center"
-            prop="enable"
-            label="状态"
-            width="80"
-          />
+          <el-table-column align="center" prop="enable" label="状态" width="80">
+            <!-- 作用域插槽 -->
+            <template #default="scope">
+              <el-button
+                size="small"
+                :type="scope.row.enable ? 'success' : 'danger'"
+                plain
+                >{{ scope.row.enable ? '启用' : '禁用' }}</el-button
+              >
+            </template>
+          </el-table-column>
           <el-table-column align="center" prop="createAt" label="创建时间" />
           <el-table-column align="center" prop="updateAt" label="更新时间" />
 
