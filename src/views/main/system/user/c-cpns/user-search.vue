@@ -78,7 +78,7 @@ const searchForm = reactive({
   realname: '',
   cellphone: '',
   enable: 1,
-  createAt: []
+  createAt: ''
 })
 
 //重置操作
