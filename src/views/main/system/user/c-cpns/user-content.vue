@@ -65,7 +65,18 @@
           </el-table-column>
         </el-table>
       </div>
-      <div class="pagination">分页</div>
+      <div class="pagination">
+        <el-pagination
+          v-model:current-page="currentPage"
+          v-model:page-size="pageSize"
+          :page-sizes="[10, 20, 30]"
+          size="default"
+          layout="sizes, prev, pager, next, jumper,total"
+          :total="usersTotalCount"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -74,13 +85,44 @@
 import { storeToRefs } from 'pinia'
 import useSystemStore from '@/store/main/system/system'
 import { formatUTC } from '@/utils/format'
+import { ref } from 'vue'
 
 //1.发起action,请求userList的数据
 const systemStore = useSystemStore()
-systemStore.postUsersListAction()
+
+const currentPage = ref(1)
+const pageSize = ref(10)
+fetchUserListData()
 
 //2.获取userList数据,进行展示
-const { usersList } = storeToRefs(systemStore)
+const { usersList, usersTotalCount } = storeToRefs(systemStore)
+
+//3.页码相关逻辑
+
+function handleSizeChange() {
+  fetchUserListData()
+}
+
+function handleCurrentChange() {
+  fetchUserListData()
+}
+
+//4.定义函数,用于发送网络请求
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function fetchUserListData(formData: any = {}) {
+  //1.获取offset/size
+  const size = pageSize.value
+  const offset = (currentPage.value - 1) * size
+  const pageInfo = { offset, size }
+
+  //2.发起网络请求
+  const queryInfo = { ...pageInfo, ...formData }
+  systemStore.postUsersListAction(queryInfo)
+}
+
+defineExpose({
+  fetchUserListData
+})
 </script>
 
 <style lang="less" scoped>
@@ -110,5 +152,11 @@ const { usersList } = storeToRefs(systemStore)
     margin-left: 0;
     padding: 5px 8px;
   }
+}
+
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
 }
 </style>

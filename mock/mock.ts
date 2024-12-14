@@ -419,8 +419,8 @@ Mock.mock('/role/4/menu', 'get', () => {
 })
 
 //模拟获取用户列表
-Mock.mock('/users/list', 'post', (options: any) => {
-  const { offset, size } = JSON.parse(options.body)
+Mock.mock('/users/list', 'post', () => {
+  //JSON.parse(options.body)
   return {
     code: 0,
     data: {
@@ -459,7 +459,7 @@ Mock.mock('/users/list', 'post', (options: any) => {
           updateAt: '2024-01-02T12:00:00Z'
         }
       ],
-      totalCount: 2
+      totalCount: 3
     }
   }
 })
