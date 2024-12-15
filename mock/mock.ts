@@ -485,7 +485,7 @@ Mock.mock('/role/list', 'post', () => {
         },
         {
           id: 5,
-          name: 'User',
+          name: 'Test',
           intro: 'User Role',
           createAt: '2024-01-01T12:00:00Z',
           updateAt: '2024-01-02T12:00:00Z'
@@ -495,7 +495,6 @@ Mock.mock('/role/list', 'post', () => {
     }
   }
 })
-
 
 Mock.mock('/department/list', 'post', () => {
   return {

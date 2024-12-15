@@ -26,13 +26,18 @@
             />
           </el-form-item>
           <el-form-item label="选择角色:" prop="roleId">
-            <el-input v-model="formData.roleId" placeholder="请选择角色" />
+            <el-select v-model="formData.roleId" placeholder="请选择角色">
+              <template v-for="item in entireRoles" :key="item.id">
+                <el-option :value="item.id" :label="item.name" />
+              </template>
+            </el-select>
           </el-form-item>
           <el-form-item label="选择部门:" prop="departmentId">
-            <el-input
-              v-model="formData.departmentId"
-              placeholder="请选择部门"
-            />
+            <el-select v-model="formData.departmentId" placeholder="请选择部门">
+              <template v-for="item in entireDepartments" :key="item.id">
+                <el-option :value="item.id" :label="item.name" />
+              </template>
+            </el-select>
           </el-form-item>
         </el-form>
       </div>
@@ -49,6 +54,8 @@
 </template>
 
 <script setup lang="ts">
+import useMainStore from '@/store/main/main'
+import { storeToRefs } from 'pinia'
 import { reactive, ref } from 'vue'
 //1.定义内部的属性
 const dialogVisible = ref(true)
@@ -60,6 +67,10 @@ const formData = reactive({
   roleId: '',
   departmentId: ''
 })
+
+//2.获取roles/departments数据
+const mainStore = useMainStore()
+const { entireRoles, entireDepartments } = storeToRefs(mainStore)
 
 //2.定义设置dialogVisible的方法
 function setModalVisible() {
