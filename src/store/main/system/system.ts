@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  deletePageById,
   deleteUsersById,
   editUserData,
   NewUserData,
@@ -8,6 +9,7 @@ import {
 } from '@/service/main/system/system'
 import { defineStore } from 'pinia'
 import type { ISystemState } from './type'
+import hyRequest from '@/service'
 
 const useSystemStore = defineStore('system', {
   state: (): ISystemState => ({
@@ -65,6 +67,14 @@ const useSystemStore = defineStore('system', {
 
       this.pageTotalCount = totalCount
       this.pageList = list
+    },
+    async deletePageByIdAction(pageName: string, id: number) {
+      const deleteResult = await deletePageById(pageName, id)
+      console.log(deleteResult)
+      this.postPageListAction(pageName, {
+        offset: 0,
+        size: 10
+      })
     }
   }
 })
