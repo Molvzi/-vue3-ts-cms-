@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IUser {
   id: number
   name: string
@@ -13,4 +14,7 @@ export interface IUser {
 export interface ISystemState {
   usersList: IUser[]
   usersTotalCount: number
+
+  pageList: any[]
+  pageTotalCount: number
 }

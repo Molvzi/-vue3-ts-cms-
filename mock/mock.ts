@@ -504,7 +504,7 @@ Mock.mock('/department/list', 'post', () => {
         {
           id: 1,
           name: 'IT',
-          parentId: null,
+          parentId: 1,
           createAt: '2024-01-01T12:00:00Z',
           updateAt: '2024-01-02T12:00:00Z',
           leader: 'Alice'
@@ -512,7 +512,7 @@ Mock.mock('/department/list', 'post', () => {
         {
           id: 2,
           name: 'HR',
-          parentId: null,
+          parentId: 2,
           createAt: '2024-01-01T12:00:00Z',
           updateAt: '2024-01-02T12:00:00Z',
           leader: 'Bob'
@@ -520,7 +520,7 @@ Mock.mock('/department/list', 'post', () => {
         {
           id: 3,
           name: 'Sales',
-          parentId: null,
+          parentId: 2,
           createAt: '2024-01-01T12:00:00Z',
           updateAt: '2024-01-02T12:00:00Z',
           leader: 'Charlie'

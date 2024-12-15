@@ -3,6 +3,7 @@ import {
   deleteUsersById,
   editUserData,
   NewUserData,
+  postPageListData,
   postUsersListData
 } from '@/service/main/system/system'
 import { defineStore } from 'pinia'
@@ -11,7 +12,10 @@ import type { ISystemState } from './type'
 const useSystemStore = defineStore('system', {
   state: (): ISystemState => ({
     usersList: [],
-    usersTotalCount: 0
+    usersTotalCount: 0,
+
+    pageList: [],
+    pageTotalCount: 0
   }),
   actions: {
     async postUsersListAction(queryInfo: any) {
@@ -52,6 +56,15 @@ const useSystemStore = defineStore('system', {
         offset: 0,
         size: 10
       })
+    },
+
+    // 针对页面的数据,增删改查
+    async postPageListAction(pageName: string, queryInfo: any) {
+      const pageListResult = await postPageListData(pageName, queryInfo)
+      const { totalCount, list } = pageListResult.data
+
+      this.pageTotalCount = totalCount
+      this.pageList = list
     }
   }
 })
