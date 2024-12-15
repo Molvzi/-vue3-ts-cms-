@@ -3,7 +3,7 @@
     <div class="content">
       <div class="header">
         <h3 class="title">用户列表</h3>
-        <el-button type="primary">新建用户</el-button>
+        <el-button type="primary" @click="handleNewUserClick">新建用户</el-button>
       </div>
       <div class="table">
         <el-table :data="usersList" border style="width: 100%">
@@ -95,9 +95,11 @@ import useSystemStore from '@/store/main/system/system'
 import { formatUTC } from '@/utils/format'
 import { ref } from 'vue'
 
+//定义事件
+const emit = defineEmits(['newClick'])
+
 //1.发起action,请求userList的数据
 const systemStore = useSystemStore()
-
 const currentPage = ref(1)
 const pageSize = ref(10)
 fetchUserListData()
@@ -131,6 +133,11 @@ function fetchUserListData(formData: any = {}) {
 //5.编辑和删除的操作
 function handleDeleteBtnClick(id: number) {
   systemStore.deleteUserByIdAction(id)
+}
+
+//6.新建用户的操作
+function handleNewUserClick() {
+  emit('newClick')
 }
 
 defineExpose({
