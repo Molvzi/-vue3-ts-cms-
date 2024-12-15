@@ -1,6 +1,11 @@
 <template>
   <div class="modal">
-    <el-dialog v-model="dialogVisible" title="新建用户" width="500" center>
+    <el-dialog
+      v-model="dialogVisible"
+      :title="isNewRef ? '新建用户' : '编辑用户'"
+      width="500"
+      center
+    >
       <div class="form">
         <el-form :model="formData" label-width="80px" size="large">
           <el-form-item label="用户名:" prop="name">
@@ -12,7 +17,7 @@
               placeholder="请输入真实姓名"
             />
           </el-form-item>
-          <el-form-item label="密码:" prop="password">
+          <el-form-item v-if="isNewRef" label="密码:" prop="password">
             <el-input
               v-model="formData.password"
               placeholder="请输入密码"
@@ -44,9 +49,7 @@
       <template #footer>
         <div class="dialog-footer">
           <el-button @click="dialogVisible = false">取消</el-button>
-          <el-button type="primary" @click="handleConfirm">
-            确定
-          </el-button>
+          <el-button type="primary" @click="handleConfirm"> 确定 </el-button>
         </div>
       </template>
     </el-dialog>
@@ -55,12 +58,13 @@
 
 <script setup lang="ts">
 import useMainStore from '@/store/main/main'
-import useSystemStore from '@/store/main/system/system';
+import useSystemStore from '@/store/main/system/system'
 import { storeToRefs } from 'pinia'
 import { reactive, ref } from 'vue'
 //1.定义内部的属性
-const dialogVisible = ref(true)
-const formData = reactive({
+const dialogVisible = ref(false)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const formData = reactive<any>({
   name: '',
   realname: '',
   password: '',
@@ -68,6 +72,8 @@ const formData = reactive({
   roleId: '',
   departmentId: ''
 })
+const isNewRef = ref(true)
+const editData = ref()
 
 //2.获取roles/departments数据
 const mainStore = useMainStore()
@@ -75,15 +81,35 @@ const systemStore = useSystemStore()
 const { entireRoles, entireDepartments } = storeToRefs(mainStore)
 
 //2.定义设置dialogVisible的方法
-function setModalVisible() {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function setModalVisible(isNew: boolean = true, itemData?: any) {
   dialogVisible.value = true
+  isNewRef.value = isNew
+  if (!isNew && itemData) {
+    //编辑时数据
+    for (const key in formData) {
+      formData[key] = itemData[key]
+    }
+    editData.value = itemData
+  } else {
+    //新建时数据
+    for (const key in formData) {
+      formData[key] = ''
+    }
+    editData.value = null
+  }
 }
 
 //3.定义确定按钮的逻辑
 function handleConfirm() {
   dialogVisible.value = false
-  //创建新用户
-  systemStore.newUserDataAction(formData)
+  if (!isNewRef.value && editData.value) {
+    //编辑用户
+    systemStore.editUserDataAction(editData.value.id, formData)
+  } else {
+    //创建新用户
+    systemStore.newUserDataAction(formData)
+  }
 }
 
 //将属性和方法暴露出去

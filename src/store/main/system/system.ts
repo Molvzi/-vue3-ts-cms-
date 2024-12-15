@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   deleteUsersById,
+  editUserData,
   NewUserData,
   postUsersListData
 } from '@/service/main/system/system'
@@ -34,6 +35,23 @@ const useSystemStore = defineStore('system', {
       //1.创建新用户
       const newResult = await NewUserData(userInfo)
       console.log(newResult)
+
+      //2.重新获取数据
+      this.postUsersListAction({
+        offset: 0,
+        size: 10
+      })
+    },
+    async editUserDataAction(id: number, userInfo: any) {
+      //1.更新用户的数据
+      const editResult = await editUserData(id, userInfo)
+      console.log(editResult)
+
+      //2.重新获取数据
+      this.postUsersListAction({
+        offset: 0,
+        size: 10
+      })
     }
   }
 })

@@ -3,7 +3,9 @@
     <div class="content">
       <div class="header">
         <h3 class="title">用户列表</h3>
-        <el-button type="primary" @click="handleNewUserClick">新建用户</el-button>
+        <el-button type="primary" @click="handleNewUserClick"
+          >新建用户</el-button
+        >
       </div>
       <div class="table">
         <el-table :data="usersList" border style="width: 100%">
@@ -57,7 +59,13 @@
 
           <el-table-column align="center" label="操作" width="150">
             <template #default="scope">
-              <el-button type="primary" size="small" icon="Edit" text>
+              <el-button
+                type="primary"
+                size="small"
+                icon="Edit"
+                text
+                @click="handleEditBtnClick(scope.row)"
+              >
                 编辑
               </el-button>
               <el-button
@@ -96,7 +104,7 @@ import { formatUTC } from '@/utils/format'
 import { ref } from 'vue'
 
 //定义事件
-const emit = defineEmits(['newClick'])
+const emit = defineEmits(['newClick', 'editClick'])
 
 //1.发起action,请求userList的数据
 const systemStore = useSystemStore()
@@ -130,14 +138,16 @@ function fetchUserListData(formData: any = {}) {
   systemStore.postUsersListAction(queryInfo)
 }
 
-//5.编辑和删除的操作
+//5.删除/新建/编辑的操作
 function handleDeleteBtnClick(id: number) {
   systemStore.deleteUserByIdAction(id)
 }
-
-//6.新建用户的操作
 function handleNewUserClick() {
   emit('newClick')
+}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function handleEditBtnClick(itemData: any) {
+  emit('editClick', itemData)
 }
 
 defineExpose({

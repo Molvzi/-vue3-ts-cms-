@@ -22,3 +22,11 @@ export function NewUserData(userInfo: any) {
     data: userInfo
   })
 }
+
+// 编辑用户
+export function editUserData(id: number, userInfo: any) {
+  return hyRequest.patch({
+    url: `/users/${id}`,
+    data: userInfo
+  })
+}

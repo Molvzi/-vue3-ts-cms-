@@ -5,7 +5,11 @@
       @query-click="handleQueryClick"
       @reset-click="handleResetClick"
     />
-    <user-content ref="contentRef" @new-click="handleNewBtnClick" />
+    <user-content
+      ref="contentRef"
+      @new-click="handleNewClick"
+      @edit-click="handleEditClick"
+    />
     <user-modal ref="modalRef" />
   </div>
 </template>
@@ -30,8 +34,12 @@ function handleResetClick() {
 
 //对modal组件的操作
 const modalRef = ref<InstanceType<typeof UserModal>>()
-function handleNewBtnClick() {
+function handleNewClick() {
   modalRef.value?.setModalVisible()
+}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function handleEditClick(itemData: any) {
+  modalRef.value?.setModalVisible(false, itemData)
 }
 </script>
 
