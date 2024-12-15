@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   deleteUsersById,
+  NewUserData,
   postUsersListData
 } from '@/service/main/system/system'
 import { defineStore } from 'pinia'
@@ -28,6 +29,11 @@ const useSystemStore = defineStore('system', {
         offset: 0,
         size: 10
       })
+    },
+    async newUserDataAction(userInfo: any) {
+      //1.创建新用户
+      const newResult = await NewUserData(userInfo)
+      console.log(newResult)
     }
   }
 })
