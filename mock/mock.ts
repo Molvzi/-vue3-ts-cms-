@@ -463,3 +463,71 @@ Mock.mock('/users/list', 'post', () => {
     }
   }
 })
+
+Mock.mock('/role/list', 'post', () => {
+  return {
+    code: 0,
+    data: {
+      list: [
+        {
+          id: 1,
+          name: 'Admin',
+          intro: 'Administrator Role',
+          createAt: '2024-01-01T12:00:00Z',
+          updateAt: '2024-01-02T12:00:00Z'
+        },
+        {
+          id: 4,
+          name: 'User',
+          intro: 'User Role',
+          createAt: '2024-01-01T12:00:00Z',
+          updateAt: '2024-01-02T12:00:00Z'
+        },
+        {
+          id: 5,
+          name: 'User',
+          intro: 'User Role',
+          createAt: '2024-01-01T12:00:00Z',
+          updateAt: '2024-01-02T12:00:00Z'
+        }
+      ],
+      totalCount: 2
+    }
+  }
+})
+
+
+Mock.mock('/department/list', 'post', () => {
+  return {
+    code: 0,
+    data: {
+      list: [
+        {
+          id: 1,
+          name: 'IT',
+          parentId: null,
+          createAt: '2024-01-01T12:00:00Z',
+          updateAt: '2024-01-02T12:00:00Z',
+          leader: 'Alice'
+        },
+        {
+          id: 2,
+          name: 'HR',
+          parentId: null,
+          createAt: '2024-01-01T12:00:00Z',
+          updateAt: '2024-01-02T12:00:00Z',
+          leader: 'Bob'
+        },
+        {
+          id: 3,
+          name: 'Sales',
+          parentId: null,
+          createAt: '2024-01-01T12:00:00Z',
+          updateAt: '2024-01-02T12:00:00Z',
+          leader: 'Charlie'
+        }
+      ],
+      totalCount: 1
+    }
+  }
+})
