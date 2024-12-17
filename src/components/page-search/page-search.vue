@@ -60,7 +60,6 @@
 
 <script setup lang="ts">
 import type { ElForm } from 'element-plus'
-import { el } from 'element-plus/es/locales.mjs'
 import { reactive, ref } from 'vue'
 
 //定义自定义事件/接受的属性
