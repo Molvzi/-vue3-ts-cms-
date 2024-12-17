@@ -26,6 +26,16 @@
                   end-placeholder="结束时间"
                 />
               </template>
+              <template v-if="item.type === 'select'">
+                <el-select
+                  v-model="searchForm[item.prop]"
+                  :placeholder="item.placeholder"
+                >
+                  <template v-for="option in item.options" :key="option.value">
+                    <el-option :label="option.label" :value="option.value" />
+                  </template>
+                </el-select>
+              </template>
             </el-form-item>
           </el-col>
         </template>
@@ -50,6 +60,7 @@
 
 <script setup lang="ts">
 import type { ElForm } from 'element-plus'
+import { el } from 'element-plus/es/locales.mjs'
 import { reactive, ref } from 'vue'
 
 //定义自定义事件/接受的属性
