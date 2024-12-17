@@ -2,7 +2,9 @@
 import {
   deletePageById,
   deleteUsersById,
+  editPageData,
   editUserData,
+  NewPageData,
   NewUserData,
   postPageListData,
   postUsersListData
@@ -70,6 +72,22 @@ const useSystemStore = defineStore('system', {
     async deletePageByIdAction(pageName: string, id: number) {
       const deleteResult = await deletePageById(pageName, id)
       console.log(deleteResult)
+      this.postPageListAction(pageName, {
+        offset: 0,
+        size: 10
+      })
+    },
+    async newPageDataAction(pageName: string, pageInfo: any) {
+      const newPageResult = await NewPageData(pageName, pageInfo)
+      console.log(newPageResult)
+      this.postPageListAction(pageName, {
+        offset: 0,
+        size: 10
+      })
+    },
+    async editPageDataAction(pageName: string, id: number, pageInfo: any) {
+      const editPageResult = await editPageData(pageName, id, pageInfo)
+      console.log(editPageResult)
       this.postPageListAction(pageName, {
         offset: 0,
         size: 10
