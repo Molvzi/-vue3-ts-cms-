@@ -44,6 +44,15 @@
               </el-table-column>
             </template>
 
+            <template v-else-if="item.type === 'custom'">
+              <el-table-column align="center" v-bind="item">
+                <template #default="scope">
+                  <slot :name="item.slotName" v-bind="scope" :prop="item.prop">
+                  </slot>
+                </template>
+              </el-table-column>
+            </template>
+
             <template v-else>
               <el-table-column align="center" v-bind="item" />
             </template>
@@ -74,6 +83,7 @@ import { ref } from 'vue'
 
 interface IProps {
   contentConfig: {
+    pageName: string
     header?: {
       title: string
       btnTitle?: string
@@ -83,7 +93,7 @@ interface IProps {
   }
 }
 
-defineProps<IProps>()
+const props = defineProps<IProps>()
 
 //定义事件
 const emit = defineEmits(['newClick', 'editClick'])
@@ -117,12 +127,12 @@ function fetchPageListData(formData: any = {}) {
 
   //2.发起网络请求
   const queryInfo = { ...pageInfo, ...formData }
-  systemStore.postPageListAction('department', queryInfo)
+  systemStore.postPageListAction(props.contentConfig.pageName, queryInfo)
 }
 
 //5.删除/新建/编辑的操作
 function handleDeleteBtnClick(id: number) {
-  systemStore.deletePageByIdAction('department', id)
+  systemStore.deletePageByIdAction(props.contentConfig.pageName, id)
 }
 function handleNewUserClick() {
   emit('newClick')

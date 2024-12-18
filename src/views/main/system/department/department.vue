@@ -11,7 +11,14 @@
       ref="contentRef"
       @new-click="handleNewClick"
       @edit-click="handleEditClick"
-    />
+    >
+      <template #leader="scope">
+        <span class="leader"> world:{{ scope.row[scope.prop] }} </span>
+      </template>
+      <template #parent="scope">
+        <span class="parent"> hhhhh:{{ scope.row[scope.prop] }} </span>
+      </template>
+    </page-content>
     <page-modal ref="modalRef" />
   </div>
 </template>
@@ -46,4 +53,11 @@ function handleEditClick(itemData: any) {
 }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.leader {
+  color: seagreen;
+}
+.parent {
+  color: red;
+}
+</style>
