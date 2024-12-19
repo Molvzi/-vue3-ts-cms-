@@ -103,10 +103,14 @@ function handleConfirm() {
   dialogVisible.value = false
   if (!isNewRef.value && editData.value) {
     //编辑用户
-    systemStore.editPageDataAction('department', editData.value.id, formData)
+    systemStore.editPageDataAction(
+      props.modalConfig.pageName,
+      editData.value.id,
+      formData
+    )
   } else {
     //创建新部门
-    systemStore.newPageDataAction('department', formData)
+    systemStore.newPageDataAction(props.modalConfig.pageName, formData)
   }
 }
 
