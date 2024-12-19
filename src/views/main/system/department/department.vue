@@ -19,7 +19,7 @@
         <span class="parent"> hhhhh:{{ scope.row[scope.prop] }} </span>
       </template>
     </page-content>
-    <page-modal ref="modalRef" />
+    <page-modal :modal-config="modalConfig" ref="modalRef" />
   </div>
 </template>
 
@@ -27,10 +27,11 @@
 import { ref } from 'vue'
 import pageSearch from '@/components/page-search/page-search.vue'
 import pageContent from '@/components/page-content/page-content.vue'
-import pageModal from './c-cpns/page-modal.vue'
+import pageModal from '@/components/page-modal/page-modal.vue'
 
 import searchConfig from './config/search.config'
 import contentConfig from './config/content.config'
+import modalConfig from './config/modal.config'
 
 //点击search,content的操作
 const contentRef = ref<InstanceType<typeof pageContent>>()
@@ -54,10 +55,4 @@ function handleEditClick(itemData: any) {
 </script>
 
 <style lang="less" scoped>
-.leader {
-  color: seagreen;
-}
-.parent {
-  color: red;
-}
 </style>
