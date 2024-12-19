@@ -52,25 +52,13 @@
 </template>
 
 <script setup lang="ts">
-import useMainStore from '@/store/main/main'
 import useSystemStore from '@/store/main/system/system'
-import { storeToRefs } from 'pinia'
 import { reactive, ref } from 'vue'
+import modalConfig from '@/views/main/system/department/config/modal.config'
+import type { IModalProps } from './type'
 
 //0.定义props
-
-interface IProps {
-  modalConfig: {
-    header: {
-      newTitle: string
-      editTitle: string
-    }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    formItems: any[]
-  }
-}
-
-const props = defineProps<IProps>()
+const props = defineProps<IModalProps>()
 
 //1.定义内部的属性
 const dialogVisible = ref(false)
@@ -86,9 +74,7 @@ const isNewRef = ref(true)
 const editData = ref()
 
 //2.获取roles/departments数据
-const mainStore = useMainStore()
 const systemStore = useSystemStore()
-const { entireDepartments } = storeToRefs(mainStore)
 
 //2.定义设置dialogVisible的方法
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -104,7 +90,9 @@ function setModalVisible(isNew: boolean = true, itemData?: any) {
   } else {
     //新建时数据
     for (const key in formData) {
-      formData[key] = ''
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const item = modalConfig.formItems.find((item: any) => item.prop === key)
+      formData[key] = item ? item.initialValue : ''
     }
     editData.value = null
   }
