@@ -54,7 +54,6 @@
 <script setup lang="ts">
 import useSystemStore from '@/store/main/system/system'
 import { reactive, ref } from 'vue'
-import modalConfig from '@/views/main/system/department/config/modal.config'
 import type { IModalProps } from './type'
 
 //0.定义props
@@ -91,7 +90,7 @@ function setModalVisible(isNew: boolean = true, itemData?: any) {
     //新建时数据
     for (const key in formData) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const item = modalConfig.formItems.find((item: any) => item.prop === key)
+      const item = props.modalConfig.formItems.find((item: any) => item.prop === key)
       formData[key] = item ? item.initialValue : ''
     }
     editData.value = null

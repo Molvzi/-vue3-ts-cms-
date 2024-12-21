@@ -530,3 +530,154 @@ Mock.mock('/department/list', 'post', () => {
     }
   }
 })
+
+// 模拟获取菜单列表
+Mock.mock('/menu/list', 'post', () => {
+  return {
+    code: 0,
+    data: {
+      list: [
+        {
+          id: 1,
+          name: '系统管理',
+          url: '/main/system',
+          type: 1,
+          sort: 1,
+          icon: 'el-icon-setting',
+          permission: 'system:manage',
+          createAt: '2024-01-01T12:00:00Z',
+          updateAt: '2024-01-02T12:00:00Z',
+          children: [
+            {
+              id: 2,
+              name: '用户管理',
+              url: '/main/system/user',
+              type: 2,
+              sort: 100,
+              permission: 'system:user',
+              parentId: 1,
+              createAt: '2024-01-01T12:00:00Z',
+              updateAt: '2024-01-02T12:00:00Z',
+              childern:[
+                {
+                  id: 5,
+                  url: null,
+                  name: '创建用户',
+                  sort: null,
+                  type: 3,
+                  parentId: 2,
+                  permission: 'system:users:create'
+                },
+                {
+                  id: 6,
+                  url: null,
+                  name: '删除用户',
+                  sort: null,
+                  type: 3,
+                  parentId: 2,
+                  permission: 'system:users:delete'
+                },
+                {
+                  id: 7,
+                  url: null,
+                  name: '修改用户',
+                  sort: null,
+                  type: 3,
+                  parentId: 2,
+                  permission: 'system:users:update'
+                },
+                {
+                  id: 8,
+                  url: null,
+                  name: '查询用户',
+                  sort: null,
+                  type: 3,
+                  parentId: 2,
+                  permission: 'system:users:query'
+                }
+              ]
+            },
+            {
+              id: 3,
+              name: '部门管理',
+              url: '/main/system/department',
+              type: 2,
+              sort: 101,
+              permission: 'system:department',
+              parentId: 1,
+              createAt: '2024-01-01T12:00:00Z',
+              updateAt: '2024-01-02T12:00:00Z'
+            },
+            {
+              id: 4,
+              name: '菜单管理',
+              url: '/main/system/menu',
+              type: 2,
+              sort: 103,
+              permission: 'system:menu',
+              parentId: 1,
+              createAt: '2024-01-01T12:00:00Z',
+              updateAt: '2024-01-02T12:00:00Z'
+            },
+            {
+              id: 5,
+              name: '角色管理',
+              url: '/main/system/role',
+              type: 2,
+              sort: 104,
+              permission: 'system:role',
+              parentId: 1,
+              createAt: '2024-01-01T12:00:00Z',
+              updateAt: '2024-01-02T12:00:00Z'
+            }
+          ]
+        },
+        {
+          id: 2,
+          name: '用户管理',
+          url: '/main/system/user',
+          type: 2,
+          sort: 100,
+          permission: 'system:user',
+          parentId: 1,
+          createAt: '2024-01-01T12:00:00Z',
+          updateAt: '2024-01-02T12:00:00Z'
+        },
+        {
+          id: 3,
+          name: '部门管理',
+          url: '/main/system/department',
+          type: 2,
+          sort: 101,
+          permission: 'system:department',
+          parentId: 1,
+          createAt: '2024-01-01T12:00:00Z',
+          updateAt: '2024-01-02T12:00:00Z'
+        },
+        {
+          id: 4,
+          name: '菜单管理',
+          url: '/main/system/menu',
+          type: 2,
+          sort: 103,
+          permission: 'system:menu',
+          parentId: 1,
+          createAt: '2024-01-01T12:00:00Z',
+          updateAt: '2024-01-02T12:00:00Z'
+        },
+        {
+          id: 5,
+          name: '角色管理',
+          url: '/main/system/role',
+          type: 2,
+          sort: 104,
+          permission: 'system:role',
+          parentId: 1,
+          createAt: '2024-01-01T12:00:00Z',
+          updateAt: '2024-01-02T12:00:00Z'
+        }
+      ],
+      totalCount: 5
+    }
+  }
+})

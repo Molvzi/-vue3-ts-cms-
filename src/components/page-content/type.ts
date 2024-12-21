@@ -5,7 +5,8 @@ export interface IPageContentConfig {
     title?: string
     btnTitle?: string
   }
-  propsList: any[]
+  propsList: any[],
+  childrenTree?: any
 }
 
 export interface IPageContentProps {
