@@ -80,20 +80,21 @@ import { storeToRefs } from 'pinia'
 import useSystemStore from '@/store/main/system/system'
 import { formatUTC } from '@/utils/format'
 import { ref } from 'vue'
+import type { IPageContentProps } from './type'
 
-interface IProps {
-  contentConfig: {
-    pageName: string
-    header?: {
-      title: string
-      btnTitle?: string
-    }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    propsList: any[]
-  }
-}
+// interface IProps {
+//   contentConfig: {
+//     pageName: string
+//     header?: {
+//       title: string
+//       btnTitle?: string
+//     }
+//     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//     propsList: any[]
+//   }
+// }
 
-const props = defineProps<IProps>()
+const prop = defineProps<IPageContentProps>()
 
 //定义事件
 const emit = defineEmits(['newClick', 'editClick'])
@@ -127,12 +128,12 @@ function fetchPageListData(formData: any = {}) {
 
   //2.发起网络请求
   const queryInfo = { ...pageInfo, ...formData }
-  systemStore.postPageListAction(props.contentConfig.pageName, queryInfo)
+  systemStore.postPageListAction(prop.contentConfig.pageName, queryInfo)
 }
 
 //5.删除/新建/编辑的操作
 function handleDeleteBtnClick(id: number) {
-  systemStore.deletePageByIdAction(props.contentConfig.pageName, id)
+  systemStore.deletePageByIdAction(prop.contentConfig.pageName, id)
 }
 function handleNewUserClick() {
   emit('newClick')

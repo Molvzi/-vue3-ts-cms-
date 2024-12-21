@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import userMainStore from '@/store/main/main'
 import pageSearch from '@/components/page-search/page-search.vue'
 import pageContent from '@/components/page-content/page-content.vue'
@@ -33,6 +33,8 @@ import pageModal from '@/components/page-modal/page-modal.vue'
 import searchConfig from './config/search.config'
 import contentConfig from './config/content.config'
 import modalConfig from './config/modal.config'
+import usePageContent from '@/hooks/usePageContent'
+import usePageModal from '@/hooks/usePageModal'
 
 //0.对modalConfig进行操作
 const modalConfigRef = computed(() => {
@@ -50,24 +52,10 @@ const modalConfigRef = computed(() => {
 })
 
 //点击search,content的操作
-const contentRef = ref<InstanceType<typeof pageContent>>()
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function handleQueryClick(queryInfo: any) {
-  contentRef.value?.fetchPageListData(queryInfo)
-}
-function handleResetClick() {
-  contentRef.value?.fetchPageListData()
-}
+const { contentRef, handleQueryClick, handleResetClick } = usePageContent()
 
-const modalRef = ref<InstanceType<typeof pageModal>>()
 //点击content,modal的操作
-function handleNewClick() {
-  modalRef.value?.setModalVisible()
-}
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function handleEditClick(itemData: any) {
-  modalRef.value?.setModalVisible(false, itemData)
-}
+const { modalRef, handleEditClick, handleNewClick } = usePageModal()
 </script>
 
 <style lang="less" scoped></style>
